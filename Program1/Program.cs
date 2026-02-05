@@ -1,29 +1,81 @@
 ﻿using System;
 
-class MayorDeEdad
+class Calculadora
 {
     static void Main()
     {
-        int edad;
+        bool continuar = true;
 
-        Console.Write("Ingresa tu edad: ");
+        Console.WriteLine("=== CALCULADORA BÁSICA MEJORADA ===");
 
-        // Validar que sea un número entero
-        while (!int.TryParse(Console.ReadLine(), out edad) || edad < 0)
+        while (continuar)
         {
-            Console.Write("❌ Edad inválida. Ingresa una edad válida: ");
+            double num1, num2;
+
+            // Validar primer número
+            Console.Write("Ingresa el primer número: ");
+            while (!double.TryParse(Console.ReadLine(), out num1))
+            {
+                Console.Write("❌ Número inválido. Intenta de nuevo: ");
+            }
+
+            // Validar segundo número
+            Console.Write("Ingresa el segundo número: ");
+            while (!double.TryParse(Console.ReadLine(), out num2))
+            {
+                Console.Write("❌ Número inválido. Intenta de nuevo: ");
+            }
+
+            Console.WriteLine("\nElige una operación:");
+            Console.WriteLine("+  Suma");
+            Console.WriteLine("-  Resta");
+            Console.WriteLine("*  Multiplicación");
+            Console.WriteLine("/  División");
+
+            Console.Write("Operación: ");
+            string operacion = Console.ReadLine();
+
+            double resultado = 0;
+            bool valido = true;
+
+            switch (operacion)
+            {
+                case "+":
+                    resultado = num1 + num2;
+                    break;
+                case "-":
+                    resultado = num1 - num2;
+                    break;
+                case "*":
+                    resultado = num1 * num2;
+                    break;
+                case "/":
+                    if (num2 != 0)
+                        resultado = num1 / num2;
+                    else
+                    {
+                        Console.WriteLine("❌ No se puede dividir entre cero.");
+                        valido = false;
+                    }
+                    break;
+                default:
+                    Console.WriteLine("❌ Operación no válida.");
+                    valido = false;
+                    break;
+            }
+
+            if (valido)
+                Console.WriteLine($"\n✅ Resultado: {resultado}");
+
+            Console.Write("\n¿Deseas hacer otra operación? (s/n): ");
+            string respuesta = Console.ReadLine().ToLower();
+
+            if (respuesta != "s")
+                continuar = false;
+
+            Console.WriteLine();
         }
 
-        if (edad >= 18)
-        {
-            Console.WriteLine("✅ Eres mayor de edad.");
-        }
-        else
-        {
-            Console.WriteLine("🚫 Eres menor de edad.");
-        }
-
-        Console.WriteLine("Presiona cualquier tecla para salir...");
-        Console.ReadKey();
+        Console.WriteLine("Gracias por usar la calculadora 😄");
     }
 }
