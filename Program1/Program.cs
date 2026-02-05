@@ -1,57 +1,27 @@
 ﻿using System;
 
-class Calculadora
+class MayorDeEdad
 {
     static void Main()
     {
-        Console.WriteLine("=== CALCULADORA BÁSICA ===");
+        int edad;
 
-        Console.Write("Ingresa el primer número: ");
-        double num1 = Convert.ToDouble(Console.ReadLine());
+        Console.Write("Ingresa tu edad: ");
 
-        Console.Write("Ingresa el segundo número: ");
-        double num2 = Convert.ToDouble(Console.ReadLine());
-
-        Console.WriteLine("Elige una operación:");
-        Console.WriteLine("+  Suma");
-        Console.WriteLine("-  Resta");
-        Console.WriteLine("*  Multiplicación");
-        Console.WriteLine("/  División");
-
-        Console.Write("Operación: ");
-        string operacion = Console.ReadLine();
-
-        double resultado = 0;
-        bool valido = true;
-
-        switch (operacion)
+        // Validar que sea un número entero
+        while (!int.TryParse(Console.ReadLine(), out edad) || edad < 0)
         {
-            case "+":
-                resultado = num1 + num2;
-                break;
-            case "-":
-                resultado = num1 - num2;
-                break;
-            case "*":
-                resultado = num1 * num2;
-                break;
-            case "/":
-                if (num2 != 0)
-                    resultado = num1 / num2;
-                else
-                {
-                    Console.WriteLine("❌ Error: No se puede dividir entre cero.");
-                    valido = false;
-                }
-                break;
-            default:
-                Console.WriteLine("❌ Operación no válida.");
-                valido = false;
-                break;
+            Console.Write("❌ Edad inválida. Ingresa una edad válida: ");
         }
 
-        if (valido)
-            Console.WriteLine($"✅ Resultado: {resultado}");
+        if (edad >= 18)
+        {
+            Console.WriteLine("✅ Eres mayor de edad.");
+        }
+        else
+        {
+            Console.WriteLine("🚫 Eres menor de edad.");
+        }
 
         Console.WriteLine("Presiona cualquier tecla para salir...");
         Console.ReadKey();
